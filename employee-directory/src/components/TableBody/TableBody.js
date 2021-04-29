@@ -1,6 +1,11 @@
 import React from "react";
 
 function TableBody(props) {
+  
+  function splitDOB(str)  {
+    return str.substr(0, 10);
+  }
+
   return (
     <tbody>
       <tr>
@@ -10,7 +15,7 @@ function TableBody(props) {
         <td>{props.firstName} {props.lastName}</td>
         <td>{props.phoneNumber}</td>
         <td>{props.emailAddress}</td>
-        <td>{props.dob}</td>
+        <td>{splitDOB(props.dob)}</td>
       </tr>
     </tbody>
   )
