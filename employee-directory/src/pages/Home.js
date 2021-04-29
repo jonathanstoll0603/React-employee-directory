@@ -12,7 +12,7 @@ class Home extends Component {
     phoneNumber: [],
     email: [],
     results: [],
-    currentSort: -1,
+    currentSort: "none",
     search: "",
     error: ""
   };
@@ -32,13 +32,18 @@ class Home extends Component {
   
   handleNameSort = () => {
 
-    const nameSort = [].concat(this.state.results)
-    .sort((a, b) => a.name.first > b.name.first ? 1 : -1)
-    // .map((item, i) => 
-    //     <div key={i}> {item.matchID} {item.timeM}{item.description}</div>
-    // );
-    console.log(nameSort);
-    return nameSort;
+    if (this.state.currentSort === "none" || this.state.currentSort === "down") {
+      const nameSort = [].concat(this.state.results)
+      .sort((a, b) => a.name.first > b.name.first ? 1 : -1)
+
+      return this.setState({ results: nameSort, currentSort: "up" });
+
+    } else if (this.state.currentSort ==="up") {
+      const nameSort = [].concat(this.state.results)
+      .sort((a, b) => b.name.first > a.name.first ? 1 : -1)
+
+      return this.setState({ results: nameSort, currentSort: "down" });
+    }
   }
 
   render() {
