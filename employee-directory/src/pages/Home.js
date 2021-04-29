@@ -12,6 +12,7 @@ class Home extends Component {
     phoneNumber: [],
     email: [],
     results: [],
+    currentSort: -1,
     search: "",
     error: ""
   };
@@ -29,12 +30,25 @@ class Home extends Component {
     this.setState({ search: event.target.value });
   };
   
+  handleNameSort = () => {
+
+    const nameSort = [].concat(this.state.results)
+    .sort((a, b) => a.name.first > b.name.first ? 1 : -1)
+    // .map((item, i) => 
+    //     <div key={i}> {item.matchID} {item.timeM}{item.description}</div>
+    // );
+    console.log(nameSort);
+    return nameSort;
+  }
 
   render() {
     return (
         <Container>
             <Search />
-            <Table results={this.state.results}>
+            <Table 
+              results={this.state.results}
+              handleNameSort={this.handleNameSort}
+            >
               <TableBody />
             </Table>
         </Container>
