@@ -16,7 +16,6 @@ class Home extends Component {
     API.getEmployees()
       .then(res => {
         this.setState({ results: res.data.results });
-        console.log(this.state.results);
       })
       .catch(err => console.log(err));
   }
