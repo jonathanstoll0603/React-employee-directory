@@ -21,8 +21,22 @@ class Home extends Component {
       .catch(err => console.log(err));
   }
 
-  handleInputChange = event => {
-    this.setState({ search: event.target.value });
+  // function that handles filtering of search results upon typed values
+  handleNameSearch = event => {
+    event.preventDefault();
+
+    const currentSearch = event.target.value;
+
+    const filteredState = this.state.results.filter((result) => {
+      let values = result.name.first.toLowerCase() + " " + result.name.last.toLowerCase();
+
+      if (values.indexOf(currentSearch) !== -1) {
+        return result;
+      }
+    })
+
+    this.setState({ results: filteredState });
+
   };
   
   // function that handles ordering names by ascending or descending order on button click
@@ -79,7 +93,7 @@ class Home extends Component {
   render() {
     return (
         <Container>
-            <Search />
+            <Search handleNameSearch={this.handleNameSearch} />
             <Table 
               results={this.state.results}
               handleNameSort={this.handleNameSort}
